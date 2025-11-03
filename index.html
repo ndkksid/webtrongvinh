@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Dịch Vụ Mạng Trong Vinh</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+    :root{
+      --primary:#0f172a;
+      --accent:#2563eb;
+      --accent-hover:#1e40af;
+      --muted:#6b7280;
+      --card:#ffffff;
+      --bg:#f9fafc;
+      --gradient-1:#6366f1;
+      --gradient-2:#8b5cf6;
+      --success:#10b981;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family:'Poppins',system-ui,Segoe UI,Roboto,Arial,sans-serif;
+      background:linear-gradient(135deg,#eef2ff,#f8fafc);
+      color:var(--primary);
+      transition:background 0.3s ease;
+    }
+    header{
+      background:linear-gradient(135deg,#2563eb,#7c3aed,#ec4899);
+      color:#fff;
+      padding:28px 16px;
+      box-shadow:0 4px 20px rgba(37,99,235,0.3);
+      position:relative;
+      overflow:hidden;
+    }
+    header::before{
+      content:'';
+      position:absolute;
+      top:-50%;
+      right:-50%;
+      width:200%;
+      height:200%;
+      background:radial-gradient(circle,rgba(255,255,255,0.1),transparent);
+      animation:pulse 15s infinite;
+    }
+    @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+    .wrap{max-width:1200px;margin:0 auto;padding:0 20px;position:relative;z-index:1}
+    h1{
+      margin:0;
+      font-size:32px;
+      font-weight:700;
+      letter-spacing:1px;
+      text-shadow:2px 2px 4px rgba(0,0,0,0.2);
+      animation:slideDown 0.6s ease;
+    }
+    @keyframes slideDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+    nav{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:18px;
+    }
+    .nav-btn{
+      background:rgba(255,255,255,0.2);
+      color:#fff;
+      padding:10px 18px;
+      border-radius:12px;
+      text-decoration:none;
+      cursor:pointer;
+      border:2px solid rgba(255,255,255,0.1);
+      transition:all 0.3s;
+      font-weight:600;
+      backdrop-filter:blur(10px);
+    }
+    .nav-btn:hover{
+      background:rgba(255,255,255,0.35);
+      transform:translateY(-2px);
+      box-shadow:0 4px 12px rgba(0,0,0,0.2);
+    }
+    .nav-btn.active{
+      background:rgba(255,255,255,0.4);
+      border-color:rgba(255,255,255,0.3);
+    }
+    section{margin-top:32px}
+    footer{
+      max-width:1200px;
+      margin:40px auto;
+      padding:24px;
+      color:var(--muted);
+      text-align:center;
+      font-size:15px;
+      background:var(--card);
+      border-radius:16px;
+      box-shadow:0 4px 12px rgba(0,0,0,0.05);
+    }
+    
+    /* Hero Section */
+    .hero{
+      background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);
+      color:#fff;
+      padding:60px 24px;
+      border-radius:20px;
+      margin-bottom:32px;
+      box-shadow:0 10px 40px rgba(102,126,234,0.3);
+      position:relative;
+      overflow:hidden;
+    }
+    .hero::after{
+      content:'';
+      position:absolute;
+      top:0;
+      left:0;
+      right:0;
+      bottom:0;
+      background:url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="2" fill="white" opacity="0.1"/></svg>');
+      animation:float 20s infinite linear;
+    }
+    @keyframes float{from{transform:translateY(0)}to{transform:translateY(-100px)}}
+    .hero h2{
+      font-size:38px;
+      margin-bottom:16px;
+      position:relative;
+      z-index:1;
+      text-shadow:2px 2px 8px rgba(0,0,0,0.2);
+    }
+    .hero p{
+      font-size:18px;
+      opacity:0.95;
+      position:relative;
+      z-index:1;
+      max-width:700px;
+      margin:0 auto;
+    }
+    @media(max-width:768px){
+      .hero>div{grid-template-columns:1fr !important;text-align:center !important}
+      .hero h2{font-size:32px !important;text-align:center !important}
+      .hero img,.hero>div>div:last-child>div{max-width:280px !important;height:280px !important}
+    }
+    
+    /* Stats Section */
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+      gap:20px;
+      margin:32px 0;
+    }
+    .stat-card{
+      background:linear-gradient(135deg,var(--card),#f0f9ff);
+      padding:24px;
+      border-radius:16px;
+      text-align:center;
+      box-shadow:0 4px 12px rgba(0,0,0,0.08);
+      transition:transform 0.3s,box-shadow 0.3s;
+      border:1px solid rgba(37,99,235,0.1);
+    }
+    .stat-card:hover{
+      transform:translateY(-5px);
+      box-shadow:0 8px 24px rgba(37,99,235,0.15);
+    }
+    .stat-number{
+      font-size:36px;
+      font-weight:700;
+      color:var(--accent);
+      margin-bottom:8px;
+    }
+    .stat-label{
+      color:var(--muted);
+      font-size:14px;
+      font-weight:600;
+    }
+    
+    .services{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      gap:24px;
+    }
+    .card{
+      background:var(--card);
+      padding:28px;
+      border-radius:16px;
+      box-shadow:0 8px 24px rgba(15,23,42,0.08);
+      text-align:center;
+      transition:all 0.3s;
+      border:2px solid transparent;
+      position:relative;
+      overflow:hidden;
+    }
+    .card::before{
+      content:'';
+      position:absolute;
+      top:0;
+      left:0;
+      width:100%;
+      height:4px;
+      background:linear-gradient(90deg,#2563eb,#7c3aed);
+      transform:scaleX(0);
+      transition:transform 0.3s;
+    }
+    .card:hover::before{transform:scaleX(1)}
+    .card:hover{
+      transform:translateY(-6px);
+      box-shadow:0 12px 32px rgba(15,23,42,0.15);
+      border-color:rgba(37,99,235,0.2);
+    }
+    .card-icon{
+      font-size:48px;
+      margin-bottom:16px;
+      display:inline-block;
+      animation:bounce 2s infinite;
+    }
+    @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+    .card h3{
+      margin:16px 0 12px;
+      color:#111827;
+      font-size:20px;
+    }
+    .card p{
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.6;
+      margin-bottom:20px;
+    }
+    .btn{
+      display:inline-block;
+      background:linear-gradient(135deg,var(--accent),#7c3aed);
+      color:#fff;
+      padding:12px 28px;
+      border-radius:10px;
+      text-decoration:none;
+      border:none;
+      cursor:pointer;
+      font-weight:600;
+      transition:all 0.3s;
+      box-shadow:0 4px 12px rgba(37,99,235,0.3);
+    }
+    .btn:hover{
+      transform:translateY(-2px);
+      box-shadow:0 6px 20px rgba(37,99,235,0.4);
+    }
+    .btn:active{transform:translateY(0)}
+    
+    .modal-backdrop{
+      position:fixed;
+      inset:0;
+      background:rgba(2,6,23,0.7);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      z-index:100;
+      backdrop-filter:blur(4px);
+      animation:fadeIn 0.3s ease;
+    }
+    .modal{
+      width:100%;
+      max-width:560px;
+      background:#fff;
+      border-radius:20px;
+      padding:32px;
+      animation:slideUp 0.4s ease;
+      box-shadow:0 20px 60px rgba(0,0,0,0.3);
+      max-height:90vh;
+      overflow-y:auto;
+    }
+    @keyframes slideUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+    .modal h2{
+      color:var(--primary);
+      margin-bottom:24px;
+      font-size:24px;
+    }
+    .field{margin-bottom:20px}
+    label{
+      display:block;
+      font-size:14px;
+      font-weight:600;
+      color:var(--primary);
+      margin-bottom:8px;
+    }
+    label .required{color:#ef4444}
+    input[type=text],input[type=tel],input[type=email],textarea{
+      width:100%;
+      padding:12px 16px;
+      border-radius:10px;
+      border:2px solid #e5e7eb;
+      font-size:15px;
+      transition:all 0.3s;
+      font-family:inherit;
+    }
+    input:focus,textarea:focus{
+      outline:none;
+      border-color:var(--accent);
+      box-shadow:0 0 0 3px rgba(37,99,235,0.1);
+    }
+    textarea{min-height:120px;resize:vertical}
+    .actions{
+      display:flex;
+      gap:12px;
+      justify-content:flex-end;
+      margin-top:24px;
+    }
+    .ghost{
+      background:transparent;
+      border:2px solid #e5e7eb;
+      padding:10px 24px;
+      border-radius:10px;
+      cursor:pointer;
+      transition:all 0.3s;
+      font-weight:600;
+      color:var(--primary);
+    }
+    .ghost:hover{
+      background:#f3f4f6;
+      border-color:#d1d5db;
+    }
+    table{
+      width:100%;
+      border-collapse:collapse;
+      margin-top:16px;
+      background:var(--card);
+      border-radius:12px;
+      overflow:hidden;
+      box-shadow:0 4px 12px rgba(0,0,0,0.05);
+    }
+    th,td{
+      padding:12px 16px;
+      text-align:left;
+      font-size:14px;
+    }
+    th{
+      background:linear-gradient(135deg,#2563eb,#7c3aed);
+      color:#fff;
+      font-weight:600;
+    }
+    td{border-bottom:1px solid #f3f4f6}
+    tr:last-child td{border-bottom:none}
+    tr:hover td{background:#f9fafb}
+    
+    .notice{
+      background:linear-gradient(135deg,#fef3c7,#fde68a);
+      padding:16px 20px;
+      border-radius:12px;
+      margin-top:16px;
+      border-left:4px solid #f59e0b;
+      font-size:14px;
+      color:#92400e;
+    }
+    
+    @media(max-width:768px){
+      h1{font-size:24px}
+      .hero h2{font-size:28px}
+      .hero p{font-size:16px}
+      nav{flex-direction:column}
+      .services{grid-template-columns:1fr}
+      .stats{grid-template-columns:repeat(2,1fr)}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>🚀 DỊCH VỤ MẠNG TRONG VINH</h1>
+      <nav>
+        <button class="nav-btn active" data-page="home">🏠 Trang chủ</button>
+        <button class="nav-btn" data-page="about">ℹ️ Giới thiệu</button>
+        <button class="nav-btn" data-page="courses">📚 Khóa học</button>
+        <button class="nav-btn" data-page="author">👨‍💼 Tác giả</button>
+        <button class="nav-btn" data-page="contact">📞 Liên hệ</button>
+        <button class="nav-btn" data-page="admin">🔐 Quản trị</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap" id="content"></main>
+  <div id="modal-root" style="display:none"></div>
+  
+  <footer>
+    <div style="font-size:18px;margin-bottom:8px">📞 <strong>Liên hệ Zalo: 0327594676</strong></div>
+    <div style="color:#9ca3af">© 2024 Dịch Vụ Mạng Trong Vinh - Phát triển thương hiệu số</div>
+  </footer>
+
+  <script>
+    const PASSWORD = "zingdapchai";
+
+    const SERVICES = [
+      { id:'facebook', title:'Dịch vụ Facebook', desc:'Tăng like, follow, comment, share thật 100% từ người dùng thực.', icon:'👥', example:'Tôi muốn tăng 1000 follow cho trang cá nhân Facebook' },
+      { id:'tiktok', title:'Dịch vụ TikTok', desc:'Tăng view, tim, chia sẻ và follow chất lượng cao, tăng trưởng nhanh.', icon:'🎵', example:'Tôi muốn tăng 5000 view và 500 tim cho video TikTok' },
+      { id:'instagram', title:'Dịch vụ Instagram', desc:'Tăng follow, like, comment – uy tín, an toàn cho tài khoản.', icon:'📸', example:'Tôi muốn tăng 1000 follow cho trang cá nhân Instagram' },
+      { id:'youtube', title:'Dịch vụ YouTube', desc:'Hỗ trợ tăng view, đăng ký, like cho kênh, phát triển bền vững.', icon:'▶️', example:'Tôi muốn tăng 1000 đăng ký cho kênh YouTube' },
+      { id:'shopee', title:'Dịch vụ Shopee', desc:'Tăng đánh giá, chăm sóc gian hàng chuyên nghiệp, tối ưu doanh số.', icon:'🛒', example:'Tôi muốn đăng ký làm Affiliate Marketing Shopee để kiếm tiền' }
+    ];
+
+    const COURSES = [
+      { id:'tiktok-shop', title:'Khóa học TikTok Shop', desc:'Học cách bán hàng hiệu quả trên TikTok Shop, chiến lược và thực hành thực tế từ A-Z.', icon:'🎯' },
+      { id:'youtube-shorts', title:'Khóa học YouTube Shorts', desc:'Tối ưu video ngắn để phát triển kênh và kiếm tiền nhanh chóng với nội dung viral.', icon:'🎬' },
+      { id:'ai-reup', title:'Khóa học AI Reup Phim', desc:'Hướng dẫn dùng AI để reup nội dung phim hợp pháp, xây kênh YouTube kiếm tiền bền vững.', icon:'🤖' },
+      { id:'shopee-affiliate', title:'Khóa học Affiliate Shopee', desc:'Bắt đầu kiếm tiền với tiếp thị liên kết Shopee — phù hợp cho người mới bắt đầu.', icon:'💰' },
+    ];
+
+    const content=document.getElementById('content');
+
+    function renderHome(){
+      content.innerHTML=`
+        <div class="hero">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;max-width:1100px;margin:0 auto">
+            <div style="text-align:left;z-index:1">
+              <h2 style="font-size:42px;margin-bottom:20px;line-height:1.2">🌟 Phát Triển Thương Hiệu Số Chuyên Nghiệp</h2>
+              <p style="font-size:18px;margin-bottom:24px;line-height:1.6">Giải pháp toàn diện cho mạng xã hội và kinh doanh online. Hơn 5000+ khách hàng tin tưởng!</p>
+              <button class="btn" style="font-size:16px;padding:14px 32px" onclick="document.querySelector('[data-page=contact]').click()">Liên hệ ngay</button>
+            </div>
+            <div style="position:relative;z-index:1">
+              <img src="https://raw.githubusercontent.com/placeholder-image/placeholder-image.github.io/main/placeholder.jpg" alt="Trọng Vinh" style="width:100%;max-width:400px;border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,0.3);border:4px solid rgba(255,255,255,0.3);display:block;margin:0 auto" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div style="display:none;width:100%;max-width:400px;height:400px;background:linear-gradient(135deg,#667eea,#764ba2);border-radius:20px;align-items:center;justify-content:center;font-size:120px;color:#fff;box-shadow:0 20px 60px rgba(102,126,234,0.4);margin:0 auto">👨‍💼</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="stats">
+          <div class="stat-card">
+            <div class="stat-number">5000+</div>
+            <div class="stat-label">Khách hàng hài lòng</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">99.9%</div>
+            <div class="stat-label">Độ tin cậy dịch vụ</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">24/7</div>
+            <div class="stat-label">Hỗ trợ khách hàng</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">100%</div>
+            <div class="stat-label">Tương tác thật</div>
+          </div>
+        </div>
+
+        <h2 style="margin-bottom:24px;font-size:28px;text-align:center">🌐 Dịch vụ mạng xã hội chuyên nghiệp</h2>
+        <section class="services">
+          ${SERVICES.map(s=>`
+            <div class="card">
+              <div class="card-icon">${s.icon}</div>
+              <h3>${s.title}</h3>
+              <p>${s.desc}</p>
+              <button class="btn" onclick="openServiceModal('${s.id}')">Đăng ký ngay</button>
+            </div>`).join('')}
+        </section>
+      `;
+    }
+
+    function renderAbout(){
+      content.innerHTML=`
+        <h2 style="font-size:32px;margin-bottom:20px">🌐 Giới thiệu Về Chúng Tôi</h2>
+        <div style="background:var(--card);padding:32px;border-radius:20px;box-shadow:0 8px 24px rgba(0,0,0,0.08);line-height:1.8">
+          <p style="font-size:16px;margin-bottom:20px">Chúng tôi là nền tảng chuyên cung cấp dịch vụ hỗ trợ mạng xã hội và các khóa học kiếm tiền online hàng đầu Việt Nam. Với đội ngũ giàu kinh nghiệm trong lĩnh vực TikTok, YouTube, Facebook, Shopee, và các nền tảng số, chúng tôi giúp bạn xây dựng thương hiệu cá nhân, tăng tương tác thật, và phát triển thu nhập bền vững trên Internet.</p>
+          <ul style="list-style:none;padding:0">
+            <li style="padding:12px;background:#f0f9ff;margin-bottom:12px;border-radius:10px;border-left:4px solid #2563eb">🔹 Dịch vụ chăm sóc & phát triển tài khoản mạng xã hội dành cho cá nhân và doanh nghiệp.</li>
+            <li style="padding:12px;background:#f0fdf4;margin-bottom:12px;border-radius:10px;border-left:4px solid #10b981">🔹 Khóa học thực chiến hướng dẫn cách kiếm tiền online hiệu quả, phù hợp cho người mới bắt đầu.</li>
+            <li style="padding:12px;background:#fef3c7;margin-bottom:12px;border-radius:10px;border-left:4px solid #f59e0b">🔹 Tư vấn chiến lược marketing số giúp bạn tối ưu nội dung và tăng trưởng nhanh chóng.</li>
+          </ul>
+          <p style="font-size:18px;font-weight:600;color:var(--accent);margin-top:24px">🚀 Cùng chúng tôi bắt đầu hành trình xây dựng thương hiệu – tạo thu nhập – làm chủ nền tảng số ngay hôm nay!</p>
+        </div>
+      `;
+    }
+
+    function renderCourses(){
+      content.innerHTML=`
+        <h2 style="font-size:32px;margin-bottom:24px;text-align:center">📚 Các khóa học nổi bật</h2>
+        <div class="services">
+          ${COURSES.map(c=>`
+            <div class="card">
+              <div class="card-icon">${c.icon}</div>
+              <h3>${c.title}</h3>
+              <p>${c.desc}</p>
+              <button class="btn" onclick="openCourseModal('${c.id}')">Đăng ký khóa học</button>
+            </div>`).join('')}
+        </div>
+      `;
+    }
+
+    function renderAuthor(){
+      content.innerHTML=`
+        <div style="background:var(--card);padding:40px;border-radius:20px;box-shadow:0 8px 24px rgba(0,0,0,0.08)">
+          <h2 style="font-size:32px;margin-bottom:32px;text-align:center">👨‍💼 Giới thiệu Tác giả — Trọng Vinh</h2>
+          <div style="text-align:center;margin-bottom:32px">
+            <img src="https://raw.githubusercontent.com/placeholder-image/placeholder-image.github.io/main/placeholder.jpg" alt="Trọng Vinh" style="width:180px;height:180px;border-radius:50%;object-fit:cover;border:6px solid #2563eb;box-shadow:0 12px 32px rgba(37,99,235,0.3);margin:0 auto;display:block" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div style="display:none;width:180px;height:180px;background:linear-gradient(135deg,#667eea,#764ba2);border-radius:50%;margin:0 auto;align-items:center;justify-content:center;font-size:72px;color:#fff;box-shadow:0 12px 32px rgba(102,126,234,0.3)">👨‍💼</div>
+          </div>
+          <p style="font-size:16px;line-height:1.8;text-align:center;max-width:800px;margin:0 auto 24px">Là người sáng lập nền tảng "Dịch vụ Mạng Trong Vinh", với nhiều năm kinh nghiệm trong lĩnh vực hỗ trợ phát triển tài khoản mạng xã hội và marketing số. Anh chuyên cung cấp các dịch vụ chăm sóc tài khoản, đào tạo kiếm tiền online, và tư vấn chiến lược nội dung giúp hàng nghìn khách hàng phát triển thương hiệu cá nhân và doanh nghiệp trên TikTok, YouTube, Facebook, Shopee, và nhiều nền tảng khác.</p>
+          <div style="margin-top:32px;padding:24px;background:linear-gradient(135deg,#f0f9ff,#e0f2fe);border-radius:16px;border-left:4px solid #2563eb;max-width:800px;margin:32px auto 0">
+            <strong style="color:var(--accent);font-size:16px">🎯 Chuyên môn:</strong>
+            <div style="margin-top:12px;color:var(--primary);line-height:1.8">Marketing số • Phát triển mạng xã hội • Đào tạo kiếm tiền online • Tư vấn chiến lược nội dung</div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderContact(){
+      content.innerHTML=`
+        <div style="background:var(--card);padding:40px;border-radius:20px;box-shadow:0 8px 24px rgba(0,0,0,0.08);text-align:center">
+          <h2 style="font-size:32px;margin-bottom:32px">📞 Thông tin liên hệ</h2>
+          <div style="display:grid;gap:20px;max-width:500px;margin:0 auto">
+            <div style="padding:24px;background:linear-gradient(135deg,#f0f9ff,#e0f2fe);border-radius:16px;border:2px solid #2563eb">
+              <div style="font-size:40px;margin-bottom:12px">📱</div>
+              <div style="font-size:14px;color:var(--muted);margin-bottom:8px">Zalo</div>
+              <div style="font-size:24px;font-weight:700;color:var(--accent)">0327594676</div>
+            </div>
+            <div style="padding:24px;background:linear-gradient(135deg,#fef3c7,#fde68a);border-radius:16px;border:2px solid #f59e0b">
+              <div style="font-size:40px;margin-bottom:12px">📧</div>
+              <div style="font-size:14px;color:var(--muted);margin-bottom:8px">Email</div>
+              <div style="font-size:20px;font-weight:600;color:#92400e">support@trongvinh.vn</div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderAdmin(){
+      const pass=prompt("Nhập mật khẩu quản trị:");
+      if(pass!==PASSWORD){alert("❌ Sai mật khẩu!");return;}
+      const orders=JSON.parse(localStorage.getItem('orders')||'[]');
+      const registrations=JSON.parse(localStorage.getItem('course_registrations')||'[]');
+      
+      content.innerHTML=`
+        <h2 style="font-size:28px;margin-bottom:24px">🧑‍💻 Quản trị hệ thống</h2>
+        
+        <div style="background:var(--card);padding:24px;border-radius:16px;box-shadow:0 4px 12px rgba(0,0,0,0.05);margin-bottom:24px">
+          <h3 style="margin-bottom:16px;color:var(--accent)">📦 Đơn hàng dịch vụ (${orders.length})</h3>
+          ${orders.length?`
+            <table>
+              <tr><th>Dịch vụ</th><th>Yêu cầu</th><th>ID/Link</th><th>Liên hệ</th><th>Ngày</th></tr>
+              ${orders.map(o=>`<tr><td>${o.service}</td><td>${o.text}</td><td>${o.target}</td><td>${o.phone}</td><td>${o.createdAt}</td></tr>`).join('')}
+            </table>`:`<p style="color:var(--muted)">Chưa có đơn hàng nào.</p>`}
+        </div>
+
+        <div style="background:var(--card);padding:24px;border-radius:16px;box-shadow:0 4px 12px rgba(0,0,0,0.05)">
+          <h3 style="margin-bottom:16px;color:var(--accent)">📚 Đăng ký khóa học (${registrations.length})</h3>
+          ${registrations.length?`
+            <table>
+              <tr><th>Khóa học</th><th>Họ tên</th><th>Số điện thoại</th><th>Email</th><th>Ngày đăng ký</th></tr>
+              ${registrations.map(r=>`<tr><td>${r.course}</td><td>${r.fullName}</td><td>${r.phone}</td><td>${r.email}</td><td>${r.createdAt}</td></tr>`).join('')}
+            </table>`:`<p style="color:var(--muted)">Chưa có đăng ký nào.</p>`}
+        </div>
+      `;
+    }
+
+    function openServiceModal(serviceId){
+      const s=SERVICES.find(x=>x.id===serviceId);
+      const root=document.getElementById('modal-root');
+      root.style.display='block';
+      root.innerHTML=`
+        <div class="modal-backdrop" id="backdrop">
+          <div class="modal">
+            <h2>✨ Đăng ký ${s.title}</h2>
+            <div class="field">
+              <label>Mô tả yêu cầu của bạn <span class="required">*</span></label>
+              <textarea id="req_text" placeholder="${s.example}"></textarea>
+            </div>
+            <div class="field">
+              <label>ID/URL bài viết hoặc tài khoản <span class="required">*</span></label>
+              <input type="text" id="req_target" placeholder="https://facebook.com/yourpage hoặc Link bài viết">
+            </div>
+            <div class="field">
+              <label>Số điện thoại / Zalo liên hệ <span class="required">*</span></label>
+              <input type="tel" id="req_phone" placeholder="0327594676">
+            </div>
+            <div class="actions">
+              <button class="ghost" onclick="closeModal()">Huỷ</button>
+              <button class="btn" onclick="submitServiceRequest('${s.id}')">Gửi yêu cầu</button>
+            </div>
+          </div>
+        </div>`;
+      document.getElementById('backdrop').addEventListener('click',e=>{if(e.target.id==='backdrop')closeModal();});
+    }
+
+    function openCourseModal(courseId){
+      const c=COURSES.find(x=>x.id===courseId);
+      const root=document.getElementById('modal-root');
+      root.style.display='block';
+      root.innerHTML=`
+        <div class="modal-backdrop" id="backdrop">
+          <div class="modal">
+            <h2>📚 Đăng ký ${c.title}</h2>
+            <div class="field">
+              <label>Họ và tên <span class="required">*</span></label>
+              <input type="text" id="course_fullname" placeholder="Nguyễn Văn A">
+            </div>
+            <div class="field">
+              <label>Số điện thoại (Zalo) <span class="required">*</span></label>
+              <input type="tel" id="course_phone" placeholder="0327594676">
+            </div>
+            <div class="field">
+              <label>Email <span class="required">*</span></label>
+              <input type="email" id="course_email" placeholder="example@gmail.com">
+            </div>
+            <div class="notice">
+              ⚠️ <strong>Lưu ý:</strong> Vui lòng mở kết bạn Zalo để chúng tôi có thể liên hệ tư vấn và hỗ trợ bạn nhanh nhất!
+            </div>
+            <div class="actions">
+              <button class="ghost" onclick="closeModal()">Huỷ</button>
+              <button class="btn" onclick="submitCourseRegistration('${c.id}')">Đăng ký ngay</button>
+            </div>
+          </div>
+        </div>`;
+      document.getElementById('backdrop').addEventListener('click',e=>{if(e.target.id==='backdrop')closeModal();});
+    }
+
+    function closeModal(){
+      document.getElementById('modal-root').style.display='none';
+      document.getElementById('modal-root').innerHTML='';
+    }
+
+    function submitServiceRequest(id){
+      const text=document.getElementById('req_text').value.trim();
+      const target=document.getElementById('req_target').value.trim();
+      const phone=document.getElementById('req_phone').value.trim();
+      
+      if(!text||!target||!phone){
+        alert("⚠️ Vui lòng nhập đầy đủ thông tin!");
+        return;
+      }
+      
+      const service=SERVICES.find(s=>s.id===id);
+      const order={
+        service:service.title,
+        text,
+        target,
+        phone,
+        createdAt:new Date().toLocaleString('vi-VN')
+      };
+      
+      const data=JSON.parse(localStorage.getItem('orders')||'[]');
+      data.push(order);
+      localStorage.setItem('orders',JSON.stringify(data));
+      
+      alert("✅ Yêu cầu đã được gửi thành công! Chúng tôi sẽ liên hệ với bạn qua Zalo trong thời gian sớm nhất.");
+      closeModal();
+    }
+
+    function submitCourseRegistration(courseId){
+      const fullName=document.getElementById('course_fullname').value.trim();
+      const phone=document.getElementById('course_phone').value.trim();
+      const email=document.getElementById('course_email').value.trim();
+      
+      if(!fullName||!phone||!email){
+        alert("⚠️ Vui lòng nhập đầy đủ thông tin!");
+        return;
+      }
+      
+      // Validate email
+      const emailRegex=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if(!emailRegex.test(email)){
+        alert("⚠️ Email không hợp lệ!");
+        return;
+      }
+      
+      // Validate phone
+      const phoneRegex=/^[0-9]{10,11}$/;
+      if(!phoneRegex.test(phone)){
+        alert("⚠️ Số điện thoại không hợp lệ!");
+        return;
+      }
+      
+      const course=COURSES.find(c=>c.id===courseId);
+      const registration={
+        course:course.title,
+        fullName,
+        phone,
+        email,
+        createdAt:new Date().toLocaleString('vi-VN')
+      };
+      
+      const data=JSON.parse(localStorage.getItem('course_registrations')||'[]');
+      data.push(registration);
+      localStorage.setItem('course_registrations',JSON.stringify(data));
+      
+      alert("🎉 Đăng ký khóa học thành công!\n\n✅ Thông tin của bạn đã được ghi nhận.\n📞 Chúng tôi sẽ liên hệ với bạn qua Zalo/Email để hướng dẫn chi tiết.\n\n⚠️ Nhớ mở kết bạn Zalo nhé!");
+      closeModal();
+    }
+
+    const pages={
+      home:renderHome,
+      about:renderAbout,
+      courses:renderCourses,
+      author:renderAuthor,
+      contact:renderContact,
+      admin:renderAdmin
+    };
+
+    document.querySelectorAll('.nav-btn').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        // Update active state
+        document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        
+        const p=btn.dataset.page;
+        if(pages[p]){
+          pages[p]();
+          window.scrollTo({top:0,behavior:'smooth'});
+        }
+      });
+    });
+
+    renderHome();
+  </script>
+</body>
+</html>
